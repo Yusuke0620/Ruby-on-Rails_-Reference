@@ -1,6 +1,7 @@
 # 目次
 
 - [テーブル作成の準備](#table-creation-preparation)
+- [日付・時刻を日本時間に変換](#Formatting-date-and-time)
 
 <br>
 <br>
@@ -88,3 +89,21 @@ user.save
 
 <br>
 <br>
+
+# 日付・時刻を日本時間に変換
+<a name="Formatting-date-and-time"></a>
+
+<br>
+日本時間に変換するには、Active Supportライブラリのin_time_zoneメソッドを使用。<br>
+created_at 属性の日時が日本時間に変換され、指定された形式で表示されます。<br>
+同様に、updated_at属性についても同じ方法で変換できます。<br>
+in_time_zone メソッドには、任意のタイムゾーンを指定できます。ここでは "Tokyo" を指定していますが、他のタイムゾーンを指定することもできます。<br>
+
+```ruby
+post.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M")
+```
+![screenshot_01](https://github.com/Yusuke0620/Ruby-on-Rails_-Reference/assets/134079967/e9973f18-8fcb-4f24-988a-d8c4ed4f3aa5)
+
+
+
+
