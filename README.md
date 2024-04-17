@@ -3,6 +3,8 @@
 - [テーブル作成の準備](#table-creation-preparation)
 - [日付・時刻を日本時間に変換](#Formatting-date-and-time)
 - [エラーメッセージ表示＜.errors.full_messages＞](#errors_full_messages)
+- [簡単なメッセージを画面に表示＜flash＞](#flash)
+
 
 <br>
 <br>
@@ -122,5 +124,49 @@ Railsではエラーメッセージを表示することができます。<br>
 post = Post.new            # 空の投稿
 post.save                  # 保存
 post.errors.full_messages  # エラーメッセージのリストを取得
-
 ```
+
+<br>
+<br>
+
+# 簡単なメッセージを画面に表示＜flash＞
+<a name="flash"></a>
+
+<br>
+一度のHTTPリクエストでのみ有効な一時的なメッセージを保存するためのRailsの仕組み<br>
+通常、ユーザーに対する成功メッセージやエラーメッセージを表示する際に使用されます。<br>
+一度表示されると、その後のリクエストではメッセージがクリアされます<br>
+
+
+
+```ruby
+# コントローラーのアクション内で成功メッセージを設定
+def create
+  @post = Post.new(post_params)
+  if @post.save
+    flash[:success] = "Post successfully created!"
+    redirect_to @post
+  else
+    flash[:error] = "Failed to create post."
+    render :new
+  end
+end
+```
+
+```ruby
+# ビュー内でflashメッセージを表示
+<% if flash[:success] %>
+  <div class="alert alert-success">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<% if flash[:error] %>
+  <div class="alert alert-danger">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+```
+<br>
+Railsドキュメント
+https://railsdoc.com/page/flash
