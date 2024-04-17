@@ -2,6 +2,7 @@
 
 - [テーブル作成の準備](#table-creation-preparation)
 - [日付・時刻を日本時間に変換](#Formatting-date-and-time)
+- [エラーメッセージ表示＜.errors.full_messages＞](#errors_full_messages)
 
 <br>
 <br>
@@ -105,5 +106,21 @@ post.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M")
 ![screenshot_01](https://github.com/Yusuke0620/Ruby-on-Rails_-Reference/assets/134079967/e9973f18-8fcb-4f24-988a-d8c4ed4f3aa5)
 
 
+<br>
+<br>
+
+# エラーメッセージ表示＜.errors.full_messages＞
+<a name="errors_full_messages"></a>
+
+<br>
+SNSなどの文章投稿機能で文字数オーバーや空投稿をした時に<br>
+Railsではエラーメッセージを表示することができます。<br>
 
 
+
+```ruby
+post = Post.new            # 空の投稿
+post.save                  # 保存
+post.errors.full_messages  # エラーメッセージのリストを取得
+
+```
