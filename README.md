@@ -175,7 +175,6 @@ end
 
 ```
 <br>
-
 <br>
 <br>
 
@@ -191,7 +190,33 @@ end
 
 ![screenshot_22](https://github.com/Yusuke0620/Ruby-on-Rails_-Reference/assets/134079967/c7dd6073-a786-4f59-88ab-6ad3acfd6907)
 
+<br>
+
  - ## 〇. 画像の送信＜multipart : true＞
 ```ruby
 <%= form_tag("...", {multipart: true}) do %> # 画像を送信したい時などにつける必要がある
 ```
+
+<br>
+
+以上がファイルをアップロードする準備
+ここからは
+①ファイル名をデータベースに保存
+②publicフォルダに画像ファイルを保存
+
+<br>
+
+ - ## 〇. データベースにファイル名保存
+```ruby
+def アクション名
+ if params[:image] # 画像が送信されているか判定する
+  @変数 = モデル名からid取得
+  @変数.画像カラム名 = 
+  image = params[:image] # 送信されたファイルが入っている
+  File.binwrite("public/#{@変数.画像カラム名}", image.read) # ファイルの場所
+ end
+end
+```
+※`if params[:image]`は画像データが送信された時だけ画像を更新するように判定する処理<br>
+※画像データは特殊なテキストファイルなので`File.binwrite`を使う<br>
+※`readメソッド`を用いることで画像データを取得できる
