@@ -4,6 +4,7 @@
 - [日付・時刻を日本時間に変換](#Formatting-date-and-time)
 - [エラーメッセージ表示＜.errors.full_messages＞](#errors_full_messages)
 - [簡単なメッセージを画面に表示＜flash＞](#flash)
+- [ユーザー画像を表示](#display-user-images)
 
 
 <br>
@@ -166,7 +167,31 @@ end
     <%= flash[:error] %>
   </div>
 <% end %>
+
+
+
+
+- [ユーザー画像を表示](#display-user-images)
+
 ```
 <br>
-Railsドキュメント
-https://railsdoc.com/page/flash
+
+<br>
+<br>
+
+# ユーザー画像を表示
+<a name="display-user-images"></a>
+
+
+ - ## 〇. 画像選択ボタン
+```ruby
+<h1>画像</h1>
+<input name="image" type="file" # 「type="file"」で画像選択できる
+```
+
+![screenshot_22](https://github.com/Yusuke0620/Ruby-on-Rails_-Reference/assets/134079967/c7dd6073-a786-4f59-88ab-6ad3acfd6907)
+
+ - ## 〇. 画像の送信＜multipart : true＞
+```ruby
+<%= form_tag("...", {multipart: true}) do %> # 画像を送信したい時などにつける必要がある
+```
