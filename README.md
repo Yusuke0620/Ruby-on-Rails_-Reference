@@ -186,7 +186,7 @@ end
  - ## 〇. 画像選択ボタン
 ```ruby
 <h1>画像</h1>
-<input name="image" type="file" # 「type="file"」で画像選択できる
+<input name="image" type="file"> # 「type="file"」で画像選択できる
 ```
 
 ![screenshot_22](https://github.com/Yusuke0620/Ruby-on-Rails_-Reference/assets/134079967/c7dd6073-a786-4f59-88ab-6ad3acfd6907)
