@@ -5,6 +5,7 @@
 - [エラーメッセージ表示＜.errors.full_messages＞](#errors_full_messages)
 - [簡単なメッセージを画面に表示＜flash＞](#flash)
 - [ユーザー画像を表示](#display-user-images)
+- [配列の要素数・テーブルのデータ数を取得＜count＞](#count-method)
 
 
 <br>
@@ -220,3 +221,25 @@ end
 ※`if params[:image]`は画像データが送信された時だけ画像を更新するように判定する処理<br>
 ※画像データは特殊なテキストファイルなので`File.binwrite`を使う<br>
 ※`readメソッド`を用いることで画像データを取得できる
+
+
+<br>
+<br>
+<br>
+
+# 配列の要素数・テーブルのデータ数を取得＜count＞
+<a name="count-method"></a>
+
+likeテーブルの全データ数を取得する方法:
+```ruby
+Like.all.count
+```
+
+<br>
+
+likeテーブルで、特定の条件（例えば write_id が2のレコード）のデータ数を取得する方法:
+```ruby
+Like.where(write_id: 2).count
+```
+
+ここで使用される .where メソッドは、指定された条件に合致するレコードをフィルタリングし、その結果に対して .count を適用することで、該当するレコードの数を取得します。
