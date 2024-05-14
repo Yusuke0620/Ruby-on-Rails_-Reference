@@ -6,6 +6,32 @@
 - [簡単なメッセージを画面に表示＜flash＞](#flash)
 - [ユーザー画像を表示](#display-user-images)
 - [配列の要素数・テーブルのデータ数を取得＜count＞](#count-method)
+- [Renderでデプロイ＞](#render-deploy)
+
+# Renderでデプロイ
+<a name="render-deploy"></a>
+
+<br>
+
+
+ - ## 1. sqlite3を切り取りPostgreSQL設定
+
+1）12＆13行目のsqlite3を切り取り、55行目から始まる*group :development do*の中にペースト
+```ruby
+# Use sqlite3 as the database for Active Record
+gem "sqlite3", "~> 1.4"
+```
+<br>
+
+ - ## 2. PostgreSQLのGemの設定
+2）一番下にスクロールし次のように記述
+※これで本番環境でのみPGという名のGemがインストールされる、pgはRailsからPostgreSQLを操作する時に使うGem
+```ruby
+group :production do
+  gem 'pg', '~> 1.2.3'
+end
+```
+
 
 
 <br>
