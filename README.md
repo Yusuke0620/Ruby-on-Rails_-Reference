@@ -31,8 +31,89 @@ group :production do
   gem 'pg', '~> 1.2.3'
 end
 ```
+<br>
+3）開発環境で使うGemのインストール※ターミナルに入力
+
+```
+bundle install --without production
+```
+確認方法
+```
+less .bundle/cmonfig
+```
+もしくはWindowsで使えない場合
+```
+type .bundle\config
+```
+
+<br>
+<br>
+
+ - ## 3. 
+4）config配下のdatabase.ymlファイルを開く
+<br><br>
+5）25行目のsqliteの行を削除し、次を入力
+※ymlはインデントが重要な役割を果たすので、必ずTABキーで設定する
+``` ruby
+  adapter:  postgresql # PostgreSQLのデータベースに接続するという設定
+  encoding: unicode    # 日本語でも扱える文字コード
+  url:      <%= ENV['DATABASE_URL'] %> # データベースのURLは環境変巣から取得するように設定
+```
+<br>
+6）config ➡ environments ➡ production.rbを開く<br>
+※Railsの本番環境用の設定ができる
+<br><br>
+7）31行目のconfig.assets.compileをtrueにする
+※assets.compileとはCSSやJavaScriptを連結して高速化すること
+
+```ruby
+config.assets.compile = true
+```
+
+<br>
+<br>
 
 
+8）25行目の最後に「スペース|| ENV['RENDER'].resent?」
+```ruby
+config.public_file_server.enabled = ENV["RENDER"].present?
+```
+
+<br>
+
+9）ルーティングに記述
+```ruby
+  root 'questions#index'
+  resources :questions do
+    resources :answers
+    end
+  end
+```
+
+<br>
+
+
+10）config ➡ puma.rbを開く
+<br>
+11）33行目付近の# workers ENV.fetch("WEB_CONCURRENCY") { 2 }のコメントアウトを削除してこの行を有効にする
+<br>
+12）{ 2 }　を  { 4 }に変更する
+<br>
+13）40行目付近の# preload_app!ののコメントアウトを削除してこの行を有効にする
+
+<br>
+<br>
+
+ - ## 4.ビルドするためのscriptを指定する
+
+14）bin ➡ 新規ファイル作成 ➡ 「render-build.sh」
+13）https://gist.github.com/ynakayu/a48392adc6bce5d9c75064ade6b314a6
+※テキストをコピーする
+13）Git Bash ➡ 該当アプリフォルダ ➡ 作成スクリプト全てのユーザーに実効権限を与えるコマンド入力
+```
+chmod a+x bin/render-build.sh
+```
+13）
 
 <br>
 <br>
