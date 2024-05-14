@@ -6,118 +6,10 @@
 - [簡単なメッセージを画面に表示＜flash＞](#flash)
 - [ユーザー画像を表示](#display-user-images)
 - [配列の要素数・テーブルのデータ数を取得＜count＞](#count-method)
-- [Renderでデプロイ＞](#render-deploy)
-
-# Renderでデプロイ
-<a name="render-deploy"></a>
-
-<br>
+- [Renderでデプロイする準備](#render-deploy)
+  
 
 
- - ## 1. sqlite3を切り取りPostgreSQL設定
-
-1）12＆13行目のsqlite3を切り取り、55行目から始まる*group :development do*の中にペースト
-```ruby
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
-```
-<br>
-
- - ## 2. PostgreSQLのGemの設定
-2）一番下にスクロールし次のように記述
-※これで本番環境でのみPGという名のGemがインストールされる、pgはRailsからPostgreSQLを操作する時に使うGem
-```ruby
-group :production do
-  gem 'pg', '~> 1.2.3'
-end
-```
-<br>
-3）開発環境で使うGemのインストール※ターミナルに入力
-
-```
-bundle install --without production
-```
-確認方法
-```
-less .bundle/cmonfig
-```
-Windowsで使えない場合
-```
-type .bundle\config
-```
-
-<br>
-<br>
-
- - ## 3. 
-4）config ➡ database.ymlファイルを開く
-<br><br>
-5）25行目のsqliteの行を削除し、次を入力<br>
-※ymlはインデントが重要な役割を果たすので、必ずTABキーで設定する
-``` ruby
-  adapter:  postgresql # PostgreSQLのデータベースに接続するという設定
-  encoding: unicode    # 日本語でも扱える文字コード
-  url:      <%= ENV['DATABASE_URL'] %> # データベースのURLは環境変巣から取得するように設定
-```
-<br>
-6）config ➡ environments ➡ production.rbを開く<br>
-※Railsの本番環境用の設定ができる
-<br><br>
-7）31行目のconfig.assets.compileをtrueにする<br>
-※assets.compileとはCSSやJavaScriptを連結して高速化すること
-
-```ruby
-config.assets.compile = true
-```
-
-<br>
-<br>
-
-
-8）25行目の最後に「スペース|| ENV['RENDER'].resent?」
-```ruby
-config.public_file_server.enabled = ENV["RENDER"].present?
-```
-
-<br>
-
-9）ルーティングに記述
-```ruby
-  root 'questions#index'
-  resources :questions do
-    resources :answers
-    end
-  end
-```
-
-<br>
-
-
-10）config ➡ puma.rbを開く
-<br><br>
-11）33行目付近の# workers ENV.fetch("WEB_CONCURRENCY") { 2 }のコメントアウトを削除してこの行を有効にする
-<br><br>
-12）{ 2 }を{ 4 }に変更する
-<br><br>
-13）40行目付近の# preload_app!ののコメントアウトを削除してこの行を有効にする
-
-<br>
-<br>
-
- - ## 4.ビルドするためのscriptを指定する
-
-14）bin ➡ 新規ファイル作成 ➡ 「render-build.sh」<br><br>
-13）https://gist.github.com/ynakayu/a48392adc6bce5d9c75064ade6b314a6
-※テキストをコピーする
-13）Git Bash ➡ 該当アプリフォルダ ➡ 作成スクリプト全てのユーザーに実効権限を与えるコマンド入力
-```
-chmod a+x bin/render-build.sh
-```
-13）
-
-<br>
-<br>
-<br>
 
 
 # テーブル作成の準備
@@ -350,3 +242,121 @@ Like.where(write_id: 2).count
 ```
 
 ここで使用される .where メソッドは、指定された条件に合致するレコードをフィルタリングし、その結果に対して .count を適用することで、該当するレコードの数を取得します。
+
+
+<br>
+<br>
+<br>
+
+
+# Renderでデプロイする準備
+<a name="render-deploy"></a>
+
+<br>
+
+
+ - ## 1. sqlite3を切り取りPostgreSQL設定
+
+1）12＆13行目のsqlite3を切り取り、55行目から始まる*group :development do*の中にペースト
+```ruby
+# Use sqlite3 as the database for Active Record
+gem "sqlite3", "~> 1.4"
+```
+<br>
+
+ - ## 2. PostgreSQLのGemの設定
+2）一番下にスクロールし次のように記述
+※これで本番環境でのみPGという名のGemがインストールされる、pgはRailsからPostgreSQLを操作する時に使うGem
+```ruby
+group :production do
+  gem 'pg', '~> 1.2.3'
+end
+```
+<br>
+3）開発環境で使うGemのインストール※ターミナルに入力
+
+```
+bundle install --without production
+```
+確認方法
+```
+less .bundle/cmonfig
+```
+Windowsで使えない場合
+```
+type .bundle\config
+```
+
+<br>
+<br>
+
+ - ## 3. 
+4）config ➡ database.ymlファイルを開く
+<br><br>
+5）25行目のsqliteの行を削除し、次を入力<br>
+※ymlはインデントが重要な役割を果たすので、必ずTABキーで設定する
+``` ruby
+  adapter:  postgresql # PostgreSQLのデータベースに接続するという設定
+  encoding: unicode    # 日本語でも扱える文字コード
+  url:      <%= ENV['DATABASE_URL'] %> # データベースのURLは環境変巣から取得するように設定
+```
+<br>
+6）config ➡ environments ➡ production.rbを開く<br>
+※Railsの本番環境用の設定ができる
+<br><br>
+7）31行目のconfig.assets.compileをtrueにする<br>
+※assets.compileとはCSSやJavaScriptを連結して高速化すること
+
+```ruby
+config.assets.compile = true
+```
+
+<br>
+<br>
+
+
+8）25行目の最後に「スペース|| ENV['RENDER'].resent?」
+```ruby
+config.public_file_server.enabled = ENV["RENDER"].present?
+```
+
+<br>
+
+9）ルーティングに記述
+```ruby
+  root 'questions#index'
+  resources :questions do
+    resources :answers
+    end
+  end
+```
+
+<br>
+
+
+10）config ➡ puma.rbを開く
+<br><br>
+11）33行目付近の# workers ENV.fetch("WEB_CONCURRENCY") { 2 }のコメントアウトを削除してこの行を有効にする
+<br><br>
+12）{ 2 }を{ 4 }に変更する
+<br><br>
+13）40行目付近の# preload_app!ののコメントアウトを削除してこの行を有効にする
+
+<br>
+<br>
+
+ - ## 4.ビルドするためのscriptを指定する
+
+14）bin ➡ 新規ファイル作成 ➡ 「render-build.sh」<br><br>
+15）https://gist.github.com/ynakayu/a48392adc6bce5d9c75064ade6b314a6
+<br>
+※テキストをコピーする
+16）Git Bash ➡ 該当アプリフォルダ ➡ 作成スクリプト全てのユーザーに実効権限を与えるコマンド入力
+```
+chmod a+x bin/render-build.sh
+```
+
+
+<br>
+<br>
+<br>
