@@ -41,7 +41,7 @@ bundle install --without production
 ```
 less .bundle/cmonfig
 ```
-もしくはWindowsで使えない場合
+Windowsで使えない場合
 ```
 type .bundle\config
 ```
@@ -50,9 +50,9 @@ type .bundle\config
 <br>
 
  - ## 3. 
-4）config配下のdatabase.ymlファイルを開く
+4）config ➡ database.ymlファイルを開く
 <br><br>
-5）25行目のsqliteの行を削除し、次を入力
+5）25行目のsqliteの行を削除し、次を入力<br>
 ※ymlはインデントが重要な役割を果たすので、必ずTABキーで設定する
 ``` ruby
   adapter:  postgresql # PostgreSQLのデータベースに接続するという設定
@@ -63,7 +63,7 @@ type .bundle\config
 6）config ➡ environments ➡ production.rbを開く<br>
 ※Railsの本番環境用の設定ができる
 <br><br>
-7）31行目のconfig.assets.compileをtrueにする
+7）31行目のconfig.assets.compileをtrueにする<br>
 ※assets.compileとはCSSやJavaScriptを連結して高速化すること
 
 ```ruby
@@ -94,11 +94,11 @@ config.public_file_server.enabled = ENV["RENDER"].present?
 
 
 10）config ➡ puma.rbを開く
-<br>
+<br><br>
 11）33行目付近の# workers ENV.fetch("WEB_CONCURRENCY") { 2 }のコメントアウトを削除してこの行を有効にする
-<br>
-12）{ 2 }　を  { 4 }に変更する
-<br>
+<br><br>
+12）{ 2 }を{ 4 }に変更する
+<br><br>
 13）40行目付近の# preload_app!ののコメントアウトを削除してこの行を有効にする
 
 <br>
@@ -106,7 +106,7 @@ config.public_file_server.enabled = ENV["RENDER"].present?
 
  - ## 4.ビルドするためのscriptを指定する
 
-14）bin ➡ 新規ファイル作成 ➡ 「render-build.sh」
+14）bin ➡ 新規ファイル作成 ➡ 「render-build.sh」<br><br>
 13）https://gist.github.com/ynakayu/a48392adc6bce5d9c75064ade6b314a6
 ※テキストをコピーする
 13）Git Bash ➡ 該当アプリフォルダ ➡ 作成スクリプト全てのユーザーに実効権限を与えるコマンド入力
