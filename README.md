@@ -7,10 +7,33 @@
 - [ユーザー画像を表示](#display-user-images)
 - [配列の要素数・テーブルのデータ数を取得＜count＞](#count-method)
 - [Renderでデプロイする準備](#render-deploy)
+- [Renderを使うためのGitの設定](#render-git)
   
+# Renderを使うためのGitの設定
+<a name="render-git"></a>
+
+<br>
+
+ - ## 1. リポジトリ新規作成
+
+1）以下のGitコマンド
+```git
+git init
+```
+
+<br>
+2）管理するファイルの選択
+<br>
+※全てを選択して追加するという意味になる
+```git
+git add -A
+
+```
 
 
-
+<br>
+<br>
+<br>
 
 # テーブル作成の準備
 <a name="table-creation-preparation"></a>
