@@ -8,27 +8,84 @@
 - [配列の要素数・テーブルのデータ数を取得＜count＞](#count-method)
 - [Renderでデプロイする準備](#render-deploy)
 - [Renderを使うためのGitの設定](#render-git)
+- [form_withとform_tagの違い](#Difference-form_with_form_tag)
   
-# Renderを使うためのGitの設定
-<a name="render-git"></a>
+<br>
+<br>
+<br>
+
+# form_withとform_tagの違い
+<a name="Difference-form_with_form_tag"></a>
 
 <br>
 
- - ## 1. リポジトリ新規作成
+### __<form_with>__
 
-1）以下のGitコマンド
-```git
-git init
+①モデル指定：最初から適切なURLやHTTPメソッドを設定できる<br>
+②簡潔な記述：モデルの属性に基づいて記述できるので、簡潔になる<br>
+③統一された記述方法：form.text_areaなどのメソッドを使って、HTMLの<textarea>タグなどを簡潔に生成できる<br>
+④デフォルトで非同期送信: form_withはデフォルトで非同期リクエスト（Ajax）を使用しますが、local: trueオプションを指定することで通常のフォーム送信も可能<br>
+
+
+### __<form_tag>__
+
+①手動設定: フォームの送信先URLやHTTPメソッドを手動で指定する必要があります。<br>
+②手動でフィールド生成: 各フィールドを手動で生成します。<br>
+
+※以下の変更例は@questionモデルオブジェクトに基づいたフォームを生成しています。<br>
+
+<br>
+
+### __変更例1__
+```erb
+<%= form.text_field :title %>
+```
+これは以下のHTMLタグを生成します
+```html
+<input type="text" name="title" id="question_title">
 ```
 
 <br>
-2）管理するファイルの選択
-<br>
-※全てを選択して追加するという意味になる
-```git
-git add -A
 
+### __変更例2__
+```erb
+<%= form.submit %>
 ```
+これは以下のHTMLタグを生成します
+```html
+<textarea name="content" id="question_content"></textarea>
+```
+
+<br>
+
+### __変更例3__
+```erb
+<%= form.submit %>
+```
+これは以下のHTMLタグを生成します
+```html
+<input type="submit" value="Create Question">
+```
+
+<br>
+
+### __IDの生成基準__
+1. モデル名: モデル名は小文字に変換されます。
+2. 属性名: 属性名も小文字で使用されます。
+3. IDの構成: id属性は、モデル名と属性名をアンダースコアでつないだ形式になります。
+
+<br>
+
+### __具体的な例__
+モデル名：Question<br>
+属性名  ：title<br>
+Railsのフォームヘルパーは以下のようにIDを生成します：<br>
+
+* モデル名：question（小文字）<br>
+* 属性名  ：title（そのまま）<br>
+* IDの構成：question_title<br>
+
+同様に、Questionモデルのcontent属性に対しては、id="question_content"が生成されます。<br>
 
 
 <br>
@@ -383,3 +440,31 @@ chmod a+x bin/render-build.sh
 <br>
 <br>
 <br>
+
+
+# Renderを使うためのGitの設定
+<a name="render-git"></a>
+
+<br>
+
+ - ## 1. リポジトリ新規作成
+
+1）以下のGitコマンド
+```git
+git init
+```
+
+<br>
+2）管理するファイルの選択
+<br>
+※全てを選択して追加するという意味になる
+
+```git
+git add -A
+```
+
+
+<br>
+<br>
+<br>
+
