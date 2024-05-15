@@ -14,7 +14,11 @@
 # ストロングパラメータ
 <a name="Strong_Parameter"></a>
 
+<br>
+
  - ## 1. 設定方法
+
+<br><br>
 
 **例: 質問の作成と更新**<br>
 **モデル：Question**<br>
@@ -25,6 +29,8 @@ class Question < ApplicationRecord
   # title, name, contentの属性を持つ
 end
 ```
+
+<br>
 
 **コントローラー**<br>
 次に、`QuestionsController`でストロングパラメータを設定します。
@@ -92,12 +98,17 @@ __ビュー__<br><br>
 <% end %>
 ```
 
+<br>
+<br>
+
 - ## 2. 分解して解説
+<br>
+
 ### 1. params
 Railsコントローラーで利用可能なオブジェクトで、リクエストのパラメータ（フォームデータ、URLパラメータなど）を含んでいます。<br><br>
 
 ### 2. require(:question)
-リクエストパラメータからquestionキーを持つハッシュを要求します。<br><br>
+リクエストパラメータからquestionキーを持つハッシュを要求します。
 
 ```ruby
 params.require(:question)
