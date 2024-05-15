@@ -11,137 +11,7 @@
 - [form_withとform_tagの違い](#Difference-form_with_form_tag)
 - [ストロングパラメータ](#Strong_Parameter)
 
-# ストロングパラメータ
-<a name="Strong_Parameter"></a>
 
-<br>
-
- - ## 1. 設定方法
-
-<br><br>
-
-**例: 質問の作成と更新**<br>
-**モデル：Question**<br>
-まず、`Question`モデルがあると仮定します。<br>
-
-```ruby
-class Question < ApplicationRecord
-  # title, name, contentの属性を持つ
-end
-```
-
-<br>
-
-**コントローラー**<br>
-次に、`QuestionsController`でストロングパラメータを設定します。
-
-
-```ruby
-class QuestionsController < ApplicationController
-  def new
-    @question = Question.new
-  end
-
-  def create
-    @question = Question.new(question_params)
-    if @question.save
-      redirect_to @question, notice: '質問が作成されました。'
-    else
-      render :new
-    end
-  end
-
-  def edit
-    @question = Question.find(params[:id])
-  end
-
-  def update
-    @question = Question.find(params[:id])
-    if @question.update(question_params)
-      redirect_to @question, notice: '質問が更新されました。'
-    else
-      render :edit
-    end
-  end
-
-  private
-
-  # ストロングパラメータを定義
-  def question_params
-    params.require(:question).permit(:title, :name, :content)
-  end
-end
-```
-<br>
-
-__ビュー__<br><br>
-以下のように、新しい質問を作成するフォームを作成します。
-```erb
-<h1>New question</h1>
-
-<%= form_with model: @question, local: true do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-  <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-  <div>
-    <%= form.submit '作成' %>
-  </div>
-<% end %>
-```
-
-<br>
-<br>
-
-- ## 2. 分解して解説
-<br>
-
-### 1. params
-Railsコントローラーで利用可能なオブジェクトで、リクエストのパラメータ（フォームデータ、URLパラメータなど）を含んでいます。<br><br>
-
-### 2. require(:question)
-リクエストパラメータからquestionキーを持つハッシュを要求します。
-
-```ruby
-params.require(:question)
-```
-
-<br>
-
-### 3. permit(:title, :name, :content)
-permitメソッドは、指定されたキーのみを含む新しいハッシュを返します。<br>
-ここでは、title、name、contentの3つのキーを許可しています。これにより、これらのキー以外のパラメータが含まれていたとしても、それらは無視されます。
-
-```ruby
-params.require(:question).permit(:title, :name, :content)
-```
-この操作によって、title、name、content以外のパラメータはすべて削除されます。
-
-<br>
-<br>
-
-### 全体の流れ
-### ①params.require(:question): ###
-
-* 'params'から'question'キーを持つハッシュを取得。
-* 'question'キーが存在しない場合、エラーを発生させる。
-
-<br>
-
-### ②permit(:title, :name, :content):
-* questionハッシュから、title、name、contentキーのみを許可。
-* 他のすべてのキーは無視される。
-
-これにより、リクエストから受け取ったパラメータのうち、許可されたものだけをフィルタリングして取得できます。<br>
-これがストロングパラメータの概念であり、セキュリティを確保するための重要な仕組みです。
 
   
 <br>
@@ -600,3 +470,139 @@ Railsのフォームヘルパーは以下のようにIDを生成します：<br>
 * IDの構成：question_title<br>
 
 同様に、Questionモデルのcontent属性に対しては、id="question_content"が生成されます。<br>
+
+<br>
+<br>
+<br>
+
+# ストロングパラメータ
+<a name="Strong_Parameter"></a>
+
+<br>
+
+ - ## 1. 設定方法
+
+<br><br>
+
+**例: 質問の作成と更新**<br>
+**モデル：Question**<br>
+まず、`Question`モデルがあると仮定します。<br>
+
+```ruby
+class Question < ApplicationRecord
+  # title, name, contentの属性を持つ
+end
+```
+
+<br>
+
+**コントローラー**<br>
+次に、`QuestionsController`でストロングパラメータを設定します。
+
+
+```ruby
+class QuestionsController < ApplicationController
+  def new
+    @question = Question.new
+  end
+
+  def create
+    @question = Question.new(question_params)
+    if @question.save
+      redirect_to @question, notice: '質問が作成されました。'
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+    if @question.update(question_params)
+      redirect_to @question, notice: '質問が更新されました。'
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  # ストロングパラメータを定義
+  def question_params
+    params.require(:question).permit(:title, :name, :content)
+  end
+end
+```
+<br>
+
+__ビュー__<br><br>
+以下のように、新しい質問を作成するフォームを作成します。
+```erb
+<h1>New question</h1>
+
+<%= form_with model: @question, local: true do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div>
+    <%= form.submit '作成' %>
+  </div>
+<% end %>
+```
+
+<br>
+<br>
+
+- ## 2. 分解して解説
+<br>
+
+### 1. params
+Railsコントローラーで利用可能なオブジェクトで、リクエストのパラメータ（フォームデータ、URLパラメータなど）を含んでいます。<br><br>
+
+### 2. require(:question)
+リクエストパラメータからquestionキーを持つハッシュを要求します。
+
+```ruby
+params.require(:question)
+```
+
+<br>
+
+### 3. permit(:title, :name, :content)
+permitメソッドは、指定されたキーのみを含む新しいハッシュを返します。<br>
+ここでは、title、name、contentの3つのキーを許可しています。これにより、これらのキー以外のパラメータが含まれていたとしても、それらは無視されます。
+
+```ruby
+params.require(:question).permit(:title, :name, :content)
+```
+この操作によって、title、name、content以外のパラメータはすべて削除されます。
+
+<br>
+<br>
+
+### 全体の流れ
+### ①params.require(:question): ###
+
+* 'params'から'question'キーを持つハッシュを取得。
+* 'question'キーが存在しない場合、エラーを発生させる。
+
+<br>
+
+### ②permit(:title, :name, :content):
+* questionハッシュから、title、name、contentキーのみを許可。
+* 他のすべてのキーは無視される。
+
+これにより、リクエストから受け取ったパラメータのうち、許可されたものだけをフィルタリングして取得できます。<br>
+これがストロングパラメータの概念であり、セキュリティを確保するための重要な仕組みです。
