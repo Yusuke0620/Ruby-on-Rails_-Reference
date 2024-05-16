@@ -10,8 +10,13 @@
 - [Renderを使うためのGitの設定](#render-git)
 - [form_withとform_tagの違い](#Difference-form_with_form_tag)
 - [ストロングパラメータ](#Strong_Parameter)
+- [destroyアクションに実装させるturbo_methodとturbo_confirm](#destroy_turbo_method_turbo_confirm)
 
 
+
+<br>
+
+ - ## 1. マイグレーションファイル作成
 
   
 <br>
@@ -606,3 +611,13 @@ params.require(:question).permit(:title, :name, :content)
 
 これにより、リクエストから受け取ったパラメータのうち、許可されたものだけをフィルタリングして取得できます。<br>
 これがストロングパラメータの概念であり、セキュリティを確保するための重要な仕組みです。
+
+<br>
+<br>
+<br>
+
+# destroyアクションに実装させるturbo_methodとturbo_confirm
+<a name="destroy_turbo_method_turbo_confirm"></a>
+
+Qiita記事↓<br>
+https://qiita.com/yusuke62/items/d2bcd9efff8c0dfb1ae4
