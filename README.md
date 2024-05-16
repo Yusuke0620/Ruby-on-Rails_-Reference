@@ -11,6 +11,7 @@
 - [form_withとform_tagの違い](#Difference-form_with_form_tag)
 - [ストロングパラメータ](#Strong_Parameter)
 - [destroyアクションに実装させるturbo_methodとturbo_confirm](#destroy_turbo_method_turbo_confirm)
+- [ビューの共通化](#View_Commonality)
 
 
 
@@ -621,3 +622,13 @@ params.require(:question).permit(:title, :name, :content)
 
 Qiita記事↓<br>
 https://qiita.com/yusuke62/items/d2bcd9efff8c0dfb1ae4
+
+<br>
+<br>
+<br>
+
+# ビューの共通化
+<a name="View_Commonality"></a>
+
+Qiita記事↓<br>
+https://qiita.com/yusuke62/items/1a6b79e8004d38b5b467
