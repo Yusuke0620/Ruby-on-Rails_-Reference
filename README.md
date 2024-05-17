@@ -12,6 +12,9 @@
 - [ストロングパラメータ](#Strong_Parameter)
 - [destroyアクションに実装させるturbo_methodとturbo_confirm](#destroy_turbo_method_turbo_confirm)
 - [ビューの共通化](#View_Commonality)
+- [CRUDとは](#CRUD)
+
+
 
 
 
@@ -632,3 +635,14 @@ https://qiita.com/yusuke62/items/d2bcd9efff8c0dfb1ae4
 
 Qiita記事↓<br>
 https://qiita.com/yusuke62/items/1a6b79e8004d38b5b467
+
+<br>
+<br>
+<br>
+
+
+ - ## 1. CRUDとは
+<a name="CRUD"></a>
+
+Qiita記事↓<br>
+[https://qiita.com/yusuke62/items/](https://qiita.com/yusuke62/items/94c3a9035c8fc328277e)
