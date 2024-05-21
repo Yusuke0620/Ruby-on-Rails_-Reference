@@ -13,6 +13,11 @@
 - [destroyアクションに実装させるturbo_methodとturbo_confirm](#destroy_turbo_method_turbo_confirm)
 - [ビューの共通化](#View_Commonality)
 - [CRUDとは](#CRUD)
+- [外部キーreferencesを使ったRailsモデルの関連付け](#references)
+  
+
+
+
 
 
 
@@ -646,8 +651,22 @@ https://qiita.com/yusuke62/items/1a6b79e8004d38b5b467
 <br>
 
 
- - ## 1. CRUDとは
+# CRUDとは　
 <a name="CRUD"></a>
 
 Qiita記事↓<br>
 [https://qiita.com/yusuke62/items/](https://qiita.com/yusuke62/items/94c3a9035c8fc328277e)
+
+<br>
+<br>
+<br>
+
+# 外部キーreferencesを使ったRailsモデルの関連付け
+<a name="references"></a>
+
+Qiita記事↓<br>
+https://qiita.com/yusuke62/items/085fe7a717d11765480f
+
+<br>
+<br>
+<br>
