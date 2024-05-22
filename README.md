@@ -14,6 +14,7 @@
 - [ビューの共通化](#View_Commonality)
 - [CRUDとは](#CRUD)
 - [外部キーreferencesを使ったRailsモデルの関連付け](#references)
+- [【Rails】newメソッドとcreateメソッドの違い](#new-method_create-method)
   
 
 
@@ -667,6 +668,16 @@ Qiita記事↓<br>
 Qiita記事↓<br>
 https://qiita.com/yusuke62/items/085fe7a717d11765480f
 
+<br>
+<br>
+<br>
+
+# newメソッドとcreateメソッドの違い
+<a name="new-method_create-method"></a>
+
+Qiita記事↓<br>
+https://qiita.com/yusuke62/items/9841208e641a04ed64b5
+ 
 <br>
 <br>
 <br>
