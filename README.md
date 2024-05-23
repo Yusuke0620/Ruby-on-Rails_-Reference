@@ -15,6 +15,7 @@
 - [CRUDとは](#CRUD)
 - [外部キーreferencesを使ったRailsモデルの関連付け](#references)
 - [【Rails】newメソッドとcreateメソッドの違い](#new-method_create-method)
+- [【Rails】updateメソッドとupdateアクションの違い](#update-method_update-action)
   
 
 
@@ -677,6 +678,16 @@ https://qiita.com/yusuke62/items/085fe7a717d11765480f
 
 Qiita記事↓<br>
 https://qiita.com/yusuke62/items/9841208e641a04ed64b5
+ 
+<br>
+<br>
+<br>
+
+# 【Rails】updateメソッドとupdateアクションの違い
+<a name="update-method_update-action"></a>
+
+Qiita記事↓<br>
+https://qiita.com/yusuke62/items/7c520ab5b2fbe5af607a
  
 <br>
 <br>
